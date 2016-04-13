@@ -1,0 +1,72 @@
+<!-- <pre>
+	{{r | json}}
+</pre> -->
+
+
+<!-- <div id="wrapper" style="display: flex; justify-content: center;">    
+    <div id="yourdiv" style="background-color: #8263A4; width: 650px; height: 400px">You text</div>
+    <div id="yourdiv" style="position: fixed; background-color: #924E66; width: 350px; height: 400px">You text</div>
+</div>
+<div id="wrapper" style="display: flex; justify-content: center;">    
+    <div id="yourdiv" style="background-color: #8263A4; width: 650px; height: 400px">You text</div>
+    <div id="yourdiv" style="background-color: #924E66; width: 350px; height: 400px">You text</div>
+</div> -->
+<div class="navbar">HELLO</div>
+<div class="background-image"></div>
+<div class="wrapper">
+  <div class="content">
+    <div class="hero-img">
+<!--     	<div class="picture-gradient"></div> -->
+          	<img src="/img/cinnamon.jpg" width="100%">
+    	<h1 class="hero-text">{{r.name}}</h1>
+    </div>
+    <div class='instructions-section'>
+	    <div class='instructions-header'>Instructions</div>
+	    <div ng-repeat="s in r.sections_instructions">
+	      	<div class='instructions-section-header'>{{s.title}}</div>
+	      	<div class='instructions-section-body'>{{s.body}}</div>
+	      	<br>
+	    </div>
+
+	    <pre>
+		{{r | json}}
+		</pre>
+	</div>
+  </div>
+   <nav role="navigation">
+    <div class="nav-wrapper">
+    	<div class='ingredients-header'>Ingredients</div>
+      <div ng-repeat="s in r.sections_ingredients">
+      	<div class='ingredient-section-header'>{{s.title}}</div>
+      	<div class='ingredient-section-body' ng-repeat="i in s.ingredients">{{i.quantity}} {{i.quantity_unit}} {{i.ingredient}}</div>
+      	<br>
+      </div>
+    </div>
+    <div class="nav-wrapper nav-wrapper-second">
+      <div class='info-section-header'>Recipe Details</div>
+      <ul class='info-list'>
+      	<li>makes: {{r.makes_quantity}} {{r.makes_noun}}</li>
+	    <li>serves: {{r.serves}}</li>
+	    <li>time: {{r.time_details}} ({{r.time_total}})</li>
+      </ul>
+
+      <div class='info-section-header'>Tools</div>
+      <ul class='info-list'>
+      	<li ng-repeat='t in r.tools'>{{t}}</li>
+      </ul>
+
+      <div class='info-section-header'>Info</div>
+      <ul class='info-list'>
+      	<li>adapted from: {{r.original_source}}</li>
+      </ul>
+
+      <div class='info-section-header'>Tags</div>
+      <ul class='info-list'>
+      	<li>
+      		<a ng-repeat="e in r.tags">{{e}}{{$last ? '' : ', '}}</a>
+      	</li>
+      </ul>
+    </div>
+  </nav>
+
+</div>

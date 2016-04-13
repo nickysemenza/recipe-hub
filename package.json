@@ -1,0 +1,17 @@
+{
+  "name": "recipe-hub",
+  "version": "1.0.0",
+  "description": "recipe hub",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Nicky Semenza <nicky@nickysemenza.com> (http://nickysemenza.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.12",
+    "request": "^2.70.0"
+  }
+}
