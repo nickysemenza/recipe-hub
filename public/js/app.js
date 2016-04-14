@@ -15,7 +15,7 @@ app.controller('RecipeDetailController', function($scope, Restangular,$routePara
 	  $scope.r=data;
 	});	
 
-	var img = "http://res.cloudinary.com/nickysemenza/image/upload/c_limit,e_blur:1766,r_0,w_1000/v1460588400/recipe-hub/cinnamon.jpg";
+	var img = "http://res.cloudinary.com/nickysemenza/image/upload/c_limit,e_blur:1766,r_0,w_1000/recipe-hub/"+slug+".jpg";
 	$rootScope.bg_img = "url('"+img+"')";
 });
 
@@ -34,6 +34,57 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 		});
 	}
 
+	$scope.addInstructionSection = function()
+	{
+		$scope.r.sections_instructions.push({"title": "a","body":["aa"]});
+	}
+	$scope.delInstructionSection = function(index)
+	{
+		console.log(index);
+		$scope.r.sections_instructions.splice(index, 1);
+	}
+	$scope.delInstructionSubSection = function(s1,s2) {
+		console.log(s1,s2);
+		$scope.r.sections_instructions[s1].body.splice(s2, 1);
+	}
+	$scope.addInstructionSubSection = function(index) {
+		console.log($scope.r.sections_instructions,index);
+		$scope.r.sections_instructions[index].body.push("aaa");
+	}
+
+
+	$scope.addIngredientSection = function()
+	{
+		$scope.r.sections_ingredients.push(
+
+{"title": "section 123",
+"ingredients": [
+  {
+    "ingredient": "asdf",
+    "quantity": 2.2,
+    "quantity_unit": "asdf",
+    "grams": 222
+  }]}
+			);
+	}
+	$scope.delIngredientSection = function(index)
+	{
+		console.log(index);
+		$scope.r.sections_ingredients.splice(index, 1);
+	}
+	$scope.delIngredientSubSection = function(s1,s2) {
+		console.log(s1,s2);
+		$scope.r.sections_ingredients[s1].ingredients.splice(s2, 1);
+	}
+	$scope.addIngredientSubSection = function(index) {
+		console.log($scope.r.sections_instructions,index);
+		$scope.r.sections_ingredients[index].ingredients.push({
+    "ingredient": "asdf",
+    "quantity": 2.2,
+    "quantity_unit": "asdf",
+    "grams": 222
+  });
+	}
 
 
 	$rootScope.bg_img = "url('')";

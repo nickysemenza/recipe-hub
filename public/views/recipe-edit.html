@@ -1,13 +1,60 @@
 <div>
-  <div>
-    <div class="editor-label">Simple label</div>
-    <input type="text" ng-model="r.name">
-  </div>
-  <div>
-    <div class="editor-label">Simple label</div>
-    <input type="text" ng-model="r.slug">
-  </div>
-<button ng-click="update()">UPDATE</button>
+	<div class="edit-group"><div class="editor-label">name</div><input type="text" ng-model="r.name"></div>
+	<div class="edit-group"><div class="editor-label">slug</div><input type="text" ng-model="r.slug"></div>
+	<div class="edit-group"><div class="editor-label">description</div><input type="text" ng-model="r.description"></div>
+	<div class="edit-group"><div class="editor-label">photo</div><input type="text" ng-model="r.photo"></div>
+	<div class="edit-group"><div class="editor-label">serves</div><input type="text" ng-model="r.serves"></div>
+	<div class="edit-group"><div class="editor-label">makes_quantity</div><input type="text" ng-model="r.makes_quantity"></div>
+	<div class="edit-group"><div class="editor-label">makes_noun</div><input type="text" ng-model="r.makes_noun"></div>
+	<div class="edit-group"><div class="editor-label">time_total</div><input type="text" ng-model="r.time_total"></div>
+	<div class="edit-group"><div class="editor-label">time_details</div><input type="text" ng-model="r.time_details"></div>
+	<div class="edit-group"><div class="editor-label">original_source</div><input type="text" ng-model="r.original_source"></div>
+
+
+	<div>
+		<table border="1" style="width: 100%">
+			<tr ng-repeat="sect in r.sections_instructions">
+				<td><input type="text" ng-model="sect.title"></td>
+				<td>
+					<div ng-repeat = "aa in sect.body track by $index">
+						<textarea type="text" ng-model="sect.body[$index]" rows=20 cols=80></textarea>
+							<button ng-click="delInstructionSubSection($parent.$index, $index)">Remove Sub Section</button>
+					</div>
+					<button ng-click="addInstructionSubSection($index)">Add Sub Section</button>
+				</td>
+				<td>{{$index}}</td>
+				<td><button ng-click="delInstructionSection($index)">Remove Section</button></td>
+			</tr>
+		</table>
+		<button ng-click="addInstructionSection()">Add Section</button>
+		<button ng-click="update()">UPDATE</button>
+	</div>
+
+	<hr>
+	<div>
+		<table border="1" style="width: 100%">
+			<tr ng-repeat="sect in r.sections_ingredients">
+				<td><input type="text" ng-model="sect.title"></td>
+				<td>
+					<div ng-repeat = "aa in sect.ingredients track by $index">
+						<input type="text" ng-model="sect.ingredients[$index].quantity">
+						<input type="text" ng-model="sect.ingredients[$index].quantity_unit">
+						<input type="text" ng-model="sect.ingredients[$index].ingredient">
+						<input type="text" ng-model="sect.ingredients[$index].grams">
+						<button ng-click="delIngredientSubSection($parent.$index, $index)">Remove Sub Section</button>
+					</div>
+					<button ng-click="addIngredientSubSection($index)">Add Sub Section</button>
+				</td>
+				<td>{{$index}}</td>
+				<td><button ng-click="delIngredientSection($index)">Remove Section</button></td>
+			</tr>
+		</table>
+		<button ng-click="addIngredientSection()">Add Section</button>
+		<button ng-click="update()">UPDATE</button>
+	</div>
+
+
+
 </div>
 
 <hr>
