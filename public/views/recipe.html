@@ -1,39 +1,36 @@
-<!-- <pre>
-	{{r | json}}
-</pre> -->
-
-
-<!-- <div id="wrapper" style="display: flex; justify-content: center;">    
-    <div id="yourdiv" style="background-color: #8263A4; width: 650px; height: 400px">You text</div>
-    <div id="yourdiv" style="position: fixed; background-color: #924E66; width: 350px; height: 400px">You text</div>
+<div class="wrapper" style="z-index: 9999">
+  <div class="navbar-wrapper">
+    <div class="navbar-left">
+      <a href="/"><i class="fa fa-arrow-left nav-icon-link"></i></a>
+      Nicky's Recipes
+      <input type="text" placeholder="search" class="searchbox">
+      <i class="fa fa-search" style="margin-left: -30px;"></i>
+    </div>
+  </div>
 </div>
-<div id="wrapper" style="display: flex; justify-content: center;">    
-    <div id="yourdiv" style="background-color: #8263A4; width: 650px; height: 400px">You text</div>
-    <div id="yourdiv" style="background-color: #924E66; width: 350px; height: 400px">You text</div>
-</div> -->
-<div class="navbar">HELLO</div>
-<div class="background-image"></div>
-<div class="wrapper">
+
+<div class="wrapper animated fadeIn">
   <div class="content">
     <div class="hero-img">
-<!--     	<div class="picture-gradient"></div> -->
-          	<img src="/img/cinnamon.jpg" width="100%">
+          <img src="http://res.cloudinary.com/nickysemenza/image/upload/c_fill,h_380,w_640/e_gradient_fade,y_-0.3,b_rgb:F2F2F2/v1460588400/recipe-hub/cinnamon.jpg" width="100%" style="z-index: -1; margin-top: 50px">
     	<h1 class="hero-text">{{r.name}}</h1>
     </div>
+    <hr>
     <div class='instructions-section'>
+      {{r.description}}
 	    <div class='instructions-header'>Instructions</div>
 	    <div ng-repeat="s in r.sections_instructions">
 	      	<div class='instructions-section-header'>{{s.title}}</div>
-	      	<div class='instructions-section-body'>{{s.body}}</div>
+	      	<div class='instructions-section-body'>
+            <ol>
+              <li ng-repeat='b in s.body'>{{b}}</li>
+            </ol>
+          </div>
 	      	<br>
 	    </div>
-
-	    <pre>
-		{{r | json}}
-		</pre>
 	</div>
   </div>
-   <nav role="navigation">
+   <div class="nav">
     <div class="nav-wrapper">
     	<div class='ingredients-header'>Ingredients</div>
       <div ng-repeat="s in r.sections_ingredients">
@@ -66,7 +63,11 @@
       		<a ng-repeat="e in r.tags">{{e}}{{$last ? '' : ', '}}</a>
       	</li>
       </ul>
+      <br>
+      <ul class='icon-list'>
+        <li  ng-repeat="e in r.icons"><img src="/img/svg/{{e}}.svg" width="30px"></li>
+      </ul>
     </div>
-  </nav>
+  </div>
 
 </div>

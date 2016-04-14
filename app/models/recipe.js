@@ -12,20 +12,27 @@ var RecipeSchema = new mongoose.Schema({
   time_details: String,
   original_source: String,
   tags: [String],
+  icons: [String],
   tools: [String],
   sections_ingredients: [
                           {
                             title: String,
                             ingredients: 
                             [
-                                { 
-                                  type: mongoose.Schema.ObjectId,
-                                  ref: 'RecipeIngredient'
+                                {
+                                  ingredient: String,
+                                  substitute: String,
+                                  description: String,
+                                  quantity: Number,
+                                  quantity_endrange: Number,
+                                  quantity_unit: String,
+                                  extras: String,
+                                  grams: Number
                                 }
                             ]
                           }
                         ],
-  sections_instructions: [{title: String, body: String}],
+  sections_instructions: [{title: String, body: [String]}],
   created_on: { type: Date, default: Date.now },
   updated_on: { type: Date, default: Date.now }
 });
