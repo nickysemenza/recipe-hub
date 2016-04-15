@@ -65,7 +65,7 @@ module.exports = function(app) {
 	});
 	app.get('/recipes', function(req, res) {
 		Recipe
-		.find({},{name: 1, photo: 1, tags: 1})
+		.find({},{name: 1, photo: 1, tags: 1, slug: 1, description: 1, time_total: 1})
 		.exec(function (err, doc){
 		  res.json(doc);
 		});
@@ -83,12 +83,12 @@ module.exports = function(app) {
 		var update = req.body;
 		var options = { multi: true };
 
-Recipe.update(conditions, update, options, callback);
+		Recipe.update(conditions, update, options, callback);
 
-function callback (err, numAffected) {
-	console.log(err);
-	console.log(numAffected);
-}
+		function callback (err, numAffected) {
+			console.log(err);
+			console.log(numAffected);
+		}
 	});
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');

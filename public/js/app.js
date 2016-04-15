@@ -7,6 +7,12 @@ app.controller('MainController', function($scope, Restangular, $rootScope) {
     };
  	var img = "http://res.cloudinary.com/nickysemenza/image/upload/c_limit,e_blur:2000,r_0,w_1000/v1460588400/recipe-hub/beef-tacos.jpg";
 	$rootScope.bg_img = "url('"+img+"')";
+
+
+	Restangular.one('recipes').get().then(function(data) {
+	  $scope.recipes=data;
+	});	
+
 });
 app.controller('RecipeDetailController', function($scope, Restangular,$routeParams, $rootScope) {
 	var slug = $routeParams.slug;
