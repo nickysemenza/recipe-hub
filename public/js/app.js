@@ -43,6 +43,31 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 		});
 	}
 
+	$scope.deleteTag = function(index)
+	{
+		$scope.r.tags.splice(index, 1);
+	}
+	$scope.addTag = function()
+	{
+		$scope.r.tags.push("aay");
+	}
+	$scope.deleteTool = function(index)
+	{
+		$scope.r.tools.splice(index, 1);
+	}
+	$scope.addTool = function()
+	{
+		$scope.r.tools.push("aay");
+	}
+	$scope.deleteIcon = function(index)
+	{
+		$scope.r.icons.splice(index, 1);
+	}
+	$scope.addIcon = function()
+	{
+		$scope.r.icons.push("aay");
+	}
+
 	$scope.addInstructionSection = function()
 	{
 		$scope.r.sections_instructions.push({"title": "a","body":["aa"]});
@@ -61,19 +86,17 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 		$scope.r.sections_instructions[index].body.push("aaa");
 	}
 
-
 	$scope.addIngredientSection = function()
 	{
 		$scope.r.sections_ingredients.push(
-
-{"title": "section 123",
-"ingredients": [
-  {
-    "ingredient": "asdf",
-    "quantity": 2.2,
-    "quantity_unit": "asdf",
-    "grams": 222
-  }]}
+			{"title": "section 123",
+			"ingredients": [
+			  {
+			    "ingredient": "asdf",
+			    "quantity": 2.2,
+			    "quantity_unit": "asdf",
+			    "grams": 222
+			  }]}
 			);
 	}
 	$scope.delIngredientSection = function(index)
@@ -88,14 +111,12 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 	$scope.addIngredientSubSection = function(index) {
 		console.log($scope.r.sections_instructions,index);
 		$scope.r.sections_ingredients[index].ingredients.push({
-    "ingredient": "asdf",
-    "quantity": 2.2,
-    "quantity_unit": "asdf",
-    "grams": 222
-  });
+		    "ingredient": "asdf",
+		    "quantity": 2.2,
+		    "quantity_unit": "asdf",
+		    "grams": 222
+		  });
 	}
-
-
 	$rootScope.bg_img = "url('')";
 });
 

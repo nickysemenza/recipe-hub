@@ -27,7 +27,6 @@
 			</tr>
 		</table>
 		<button ng-click="addInstructionSection()">Add Section</button>
-		<button ng-click="update()">UPDATE</button>
 	</div>
 
 	<hr>
@@ -50,9 +49,40 @@
 			</tr>
 		</table>
 		<button ng-click="addIngredientSection()">Add Section</button>
-		<button ng-click="update()">UPDATE</button>
 	</div>
 
+	<hr>
+	<div>
+		<h4>tags</h4>
+		<table border="1">
+			<tr ng-repeat="t in r.tags track by $index">
+				<td><input type="text" ng-model="r.tags[$index]"><button ng-click="deleteTag($index)">delete</button></td>
+			</tr>
+		</table>
+		<button ng-click="addTag()">add tag</button>
+	</div>
+
+	<div>
+		<h4>icons</h4>
+		<table border="1">
+			<tr ng-repeat="t in r.icons track by $index">
+				<td><input type="text" ng-model="r.icons[$index]"><button ng-click="deleteIcon($index)">delete</button></td>
+			</tr>
+		</table>
+		<button ng-click="addIcon()">add icon</button>
+	</div>
+
+	<div>
+		<h4>tools</h4>
+		<table border="1">
+			<tr ng-repeat="t in r.tools track by $index">
+				<td><input type="text" ng-model="r.tools[$index]"><button ng-click="deleteTool($index)">delete</button></td>
+			</tr>
+		</table>
+		<button ng-click="addTool()">add tool</button>
+	</div>
+
+<button ng-click="update()">UPDATE</button>
 
 
 </div>
@@ -60,7 +90,7 @@
 <hr>
 
 
-<pre>
+<!-- <pre>
   {{r | json}}
 
-</pre>
+</pre> -->
