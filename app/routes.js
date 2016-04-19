@@ -78,7 +78,11 @@ module.exports = function(app) {
 		});
 	});
 	app.put('/recipes/:slug', function(req, res) {
-		console.log(req.body);
+		if(req.headers.token != settings.token)//auth
+		{
+			res.json("not allowed!");
+			return;
+		}
 		var conditions = { slug: req.params.slug};
 		var update = req.body;
 		var options = { multi: true };
@@ -88,6 +92,7 @@ module.exports = function(app) {
 		function callback (err, numAffected) {
 			console.log(err);
 			console.log(numAffected);
+			res.json("yay");
 		}
 	});
 	app.get('*', function(req, res) {

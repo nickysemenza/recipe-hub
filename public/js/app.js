@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute','ngRoute','restangular']);
+var app = angular.module('app', ['ngRoute','ngRoute','restangular','LocalStorageModule']);
 
 app.controller('MainController', function($scope, Restangular, $rootScope) {
 
@@ -14,8 +14,10 @@ app.controller('MainController', function($scope, Restangular, $rootScope) {
 	});	
 
 });
-app.controller('RecipeDetailController', function($scope, Restangular,$routeParams, $rootScope) {
+app.controller('RecipeDetailController', function($scope, Restangular,$routeParams, $rootScope, localStorageService) {
 	var slug = $routeParams.slug;
+
+	$scope.is_logged_in = (localStorageService.get('token') != null)
 
 	Restangular.one('recipes/'+slug).get().then(function(data) {
 	  $scope.r=data;
@@ -25,7 +27,7 @@ app.controller('RecipeDetailController', function($scope, Restangular,$routePara
 	$rootScope.bg_img = "url('"+img+"')";
 });
 
-app.controller('RecipeEditDetailController', function($scope, Restangular,$routeParams, $rootScope) {
+app.controller('RecipeEditDetailController', function($scope, Restangular,$routeParams, $rootScope, localStorageService) {
 	var slug = $routeParams.slug;
 
 	Restangular.one('recipes/'+slug).get().then(function(data) {
@@ -35,6 +37,7 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 	$scope.update = function()
 	{
 		console.log($scope.r);
+		Restangular.setDefaultHeaders({token: localStorageService.get('token')});
 		Restangular.one('recipes/'+slug).customPUT($scope.r).then(function(data) {
 		  // $scope.r=data;
 		});
@@ -100,7 +103,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	$routeProvider
 		.when('/:slug/edit', {
 			templateUrl: 'views/recipe-edit.html',
-			controller: 'RecipeEditDetailController'
+			controller: 'RecipeEditDetailController',
+			authorize: true
 		})
 		.when('/:slug', {
 			templateUrl: 'views/recipe.html',
@@ -112,3 +116,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		});
 	$locationProvider.html5Mode(true);
 }]);
+
+app.run(["$rootScope", "$location","localStorageService", function($rootScope, $location, localStorageService) {
+        $rootScope.$on("$routeChangeStart", function(evt, to, from) {
+            if(to.authorize)
+            {
+            	if(localStorageService.get('token') == null)
+            		$location.path( "/" );
+            }
+        });
+    }]);
