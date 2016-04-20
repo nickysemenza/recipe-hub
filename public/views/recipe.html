@@ -34,17 +34,24 @@
    <div class="nav">
     <div class="nav-wrapper">
     	<div class='ingredients-header'>Ingredients</div>
-      <div ng-repeat="s in r.sections_ingredients">
-      	<div class='ingredient-section-header'>{{s.title}}</div>
-      	<div class='ingredient-section-body' ng-repeat="i in s.ingredients">{{i.quantity}} {{i.quantity_unit}} {{i.ingredient}}</div>
-      	<br>
+        <div ng-repeat="s in r.sections_ingredients">
+        	<div class='ingredient-section-header'>{{s.title}}</div>
+        	<div class='ingredient-section-body' ng-repeat="i in s.ingredients">{{i.quantity | portion:portion_scale}} {{i.quantity_unit}} {{i.ingredient}}</div>
+        	<br>
       </div>
+      <div id="portionscaler" class='ingredient-section-body'>
+        portion scale     
+        <input type='button' value='-' class='qtyminus' ng-click="scalePortionDown()"/>
+        {{portion_scale}}
+        <input type='button' value='+' class='qtyplus' ng-click="scalePortionUp()"/>
+      </div>
+
     </div>
     <div class="nav-wrapper nav-wrapper-second">
       <div class='info-section-header'>Recipe Details</div>
       <ul class='info-list'>
-      	<li>makes: {{r.makes_quantity}} {{r.makes_noun}}</li>
-	    <li>serves: {{r.serves}}</li>
+      	<li>makes: {{r.makes_quantity | portion:portion_scale}} {{r.makes_noun}}</li>
+	    <li>serves: {{r.serves | portion:portion_scale}}</li>
 	    <li>time: {{r.time_details}} ({{r.time_total}})</li>
       </ul>
 

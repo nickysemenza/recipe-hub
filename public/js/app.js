@@ -23,6 +23,19 @@ app.controller('RecipeDetailController', function($scope, Restangular,$routePara
 	  $scope.r=data;
 	});	
 
+	$scope.scalePortionUp = function()
+	{
+		$scope.portion_scale++;
+	}
+	$scope.scalePortionDown = function()
+	{
+		$scope.portion_scale--;
+		if($scope.portion_scale < 1)
+			$scope.portion_scale = 1;
+	}
+
+	$scope.portion_scale = 1;
+
 	var img = "http://res.cloudinary.com/nickysemenza/image/upload/c_limit,e_blur:1766,r_0,w_1000/recipe-hub/"+slug+".jpg";
 	$rootScope.bg_img = "url('"+img+"')";
 });
@@ -147,3 +160,10 @@ app.run(["$rootScope", "$location","localStorageService", function($rootScope, $
             }
         });
     }]);
+
+app.filter('portion', function($filter) {
+
+  return function(input, multiplier) {
+    return input * multiplier;
+  };
+});
