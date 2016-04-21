@@ -1,0 +1,18 @@
+<table border="1">
+	<tr ng-repeat="each in schedules">
+		<td>{{each.day | amDateFormat:'dddd, MMMM Do YYYY'}}</td>
+		<td><li ng-repeat='r in each.recipe'>{{r.name}}</li></td>
+	</tr>
+</table>
+
+{{myDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+
+<md-datepicker ng-model="myDate" 
+md-placeholder="Enter date"
+md-min-date="minDate" md-max-date="maxDate">
+</md-datepicker>
+
+<datepicker
+date-format="MMMM d, y">
+  <input ng-model="myDate" type="text" date-min-limit="minDate" date-max-limit="maxDate"/>
+</datepicker>

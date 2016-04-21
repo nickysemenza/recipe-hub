@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute','ngRoute','restangular','LocalStorageModule']);
+var app = angular.module('app', ['ngRoute','ngRoute','restangular','LocalStorageModule','angularMoment','720kb.datepicker']);
 
 app.controller('MainController', function($scope, Restangular, $rootScope) {
 
@@ -133,8 +133,23 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 	$rootScope.bg_img = "url('')";
 });
 
+app.controller('ScheduleController', function($scope, Restangular, $rootScope) {
+
+	Restangular.one('schedules').get().then(function(data) {
+	  $scope.schedules=data;
+	});	
+
+	$scope.minDate = moment().subtract(2, 'days').toDate();
+	$scope.maxDate = moment().add(2, 'weeks').toDate();
+
+});
+
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
+		.when('/schedule', {
+			templateUrl: 'views/schedule.html',
+			controller: 'ScheduleController'
+		})
 		.when('/:slug/edit', {
 			templateUrl: 'views/recipe-edit.html',
 			controller: 'RecipeEditDetailController',

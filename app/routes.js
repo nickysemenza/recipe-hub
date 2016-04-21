@@ -1,6 +1,9 @@
 var settings = require('.././settings');
 var Recipe = require('./models/recipe');
-
+var Schedule = require('./models/schedule');
+var moment = require('moment');
+var async = require("async");
+var _ = require("underscore");
 module.exports = function(app) {
 	app.get('/seed', function(req, res) {
 
@@ -62,6 +65,22 @@ module.exports = function(app) {
 		})
 
 		
+	});
+	app.get('/test', function(req, res) {
+		Recipe
+		.findOne(function (err, doc){
+		  var rid = doc._id;
+		  var s = new Schedule;
+		  s.recipe = [rid,rid];
+		  s.save();
+		});
+	});
+	app.get('/schedules', function(req, res) {
+		Schedule.find({})
+		.populate('recipe')
+		.exec(function (err, doc){
+			res.json(doc);
+		});
 	});
 	app.get('/recipes', function(req, res) {
 		Recipe

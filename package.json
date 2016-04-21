@@ -9,9 +9,12 @@
   "author": "Nicky Semenza <nicky@nickysemenza.com> (http://nickysemenza.com/)",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "moment": "^2.13.0",
     "mongoose": "^4.4.12",
-    "request": "^2.70.0"
+    "request": "^2.70.0",
+    "underscore": "^1.8.3"
   }
 }
