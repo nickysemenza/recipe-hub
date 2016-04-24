@@ -5,7 +5,7 @@ app.controller('MainController', function($scope, Restangular, $rootScope) {
 	$scope.range = function(n) {
         return new Array(n);
     };
- 	var img = "http://res.cloudinary.com/nickysemenza/image/upload/c_limit,e_blur:2000,r_0,w_1000/v1460588400/recipe-hub/beef-tacos.jpg";
+ 	var img = "http://www.photos-public-domain.com/wp-content/uploads/2012/03/bamboo-cutting-board-texture.jpg";
 	$rootScope.bg_img = "url('"+img+"')";
 
 
