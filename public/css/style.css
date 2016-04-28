@@ -75,9 +75,9 @@ body
   margin-left: -300px;
 }
 .hero-text {
-	margin-top: -20px;
+	margin-top: -50px;
 	padding-left: 20px;
-  padding-bottom: 14px;
+  padding-bottom: 0px;
   font-weight: 700;
 	color: black;
 }
@@ -113,7 +113,7 @@ body
 }
 .instructions-section 
 {
-	padding: 20px;
+	padding-left: 20px;
 }
 .instructions-section-header
 {
