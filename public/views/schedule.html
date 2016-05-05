@@ -5,14 +5,17 @@
 	</tr>
 </table>
 
-{{myDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+{{dateInput | amDateFormat:'dddd, MMMM Do YYYY'}}
 
-<md-datepicker ng-model="myDate" 
+<md-datepicker ng-model="dateInput" 
 md-placeholder="Enter date"
 md-min-date="minDate" md-max-date="maxDate">
 </md-datepicker>
 
 <datepicker
 date-format="MMMM d, y">
-  <input ng-model="myDate" type="text" date-min-limit="minDate" date-max-limit="maxDate"/>
+  <input ng-model="dateInput" type="text" date-min-limit="minDate" date-max-limit="maxDate"/>
 </datepicker>
+
+<hr>
+<li ng-repeat="each in recipes">{{each.name}} ({{each._id}})</li>

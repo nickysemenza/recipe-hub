@@ -142,6 +142,10 @@ app.controller('ScheduleController', function($scope, Restangular, $rootScope) {
 	$scope.minDate = moment().subtract(2, 'days').toDate();
 	$scope.maxDate = moment().add(2, 'weeks').toDate();
 
+	Restangular.one('recipes').get().then(function(data) {
+	  $scope.recipes=data;
+	});
+
 });
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
