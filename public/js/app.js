@@ -146,6 +146,12 @@ app.controller('ScheduleController', function($scope, Restangular, $rootScope) {
 	  $scope.recipes=data;
 	});
 
+	$scope.selectRecipe = function(r)
+	{
+		console.log(r);
+		$scope.recipeInput = r;
+	}
+
 });
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
