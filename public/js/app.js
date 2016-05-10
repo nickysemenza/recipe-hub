@@ -133,7 +133,7 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 	$rootScope.bg_img = "url('')";
 });
 
-app.controller('ScheduleController', function($scope, Restangular, $rootScope) {
+app.controller('ScheduleController', function($scope, Restangular, $rootScope, localStorageService) {
 
 	Restangular.one('schedules').get().then(function(data) {
 	  $scope.schedules=data;
@@ -150,6 +150,14 @@ app.controller('ScheduleController', function($scope, Restangular, $rootScope) {
 	{
 		console.log(r);
 		$scope.recipeInput = r;
+	}
+
+	$scope.addItem = function()
+	{
+		Restangular.setDefaultHeaders({token: localStorageService.get('token')});
+		Restangular.one('schedules/add').customPOST({recipe_id: $scope.recipeInput._id, day: $scope.dateInput}).then(function(data) {
+		  // $scope.r=data;
+		});
 	}
 
 });

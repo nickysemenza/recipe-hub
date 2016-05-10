@@ -9,6 +9,8 @@ DATE: {{dateInput | amDateFormat:'dddd, MMMM Do YYYY'}}
 <br>
 RECIPE: {{recipeInput.name}}
 
+<button ng-click="addItem()">Add</button>
+
 <md-datepicker ng-model="dateInput" 
 md-placeholder="Enter date"
 md-min-date="minDate" md-max-date="maxDate">

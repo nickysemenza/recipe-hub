@@ -82,6 +82,36 @@ module.exports = function(app) {
 			res.json(doc);
 		});
 	});
+	app.post('/schedules/add', function(req, res) {
+		console.log(req.body);
+
+		Schedule
+		.findOne({ day: req.body.day})
+		.exec(function (err, s)
+		{
+			if(s==null)
+			{
+				//create 
+				s = new Schedule;
+				s.day = req.body.day;
+				s.recipe = [req.body.recipe_id];
+				s.save(function(err, r) 
+				{
+					res.json(r);
+				});
+			}
+			else
+			{
+				s.recipe.push(req.body.recipe_id);
+				s.save(function(err, r) 
+				{
+					res.json(r);
+				});
+			}
+		  // res.json(s);
+		});
+
+	});
 	app.get('/recipes', function(req, res) {
 		Recipe
 		.find({},{name: 1, photo: 1, tags: 1, slug: 1, description: 1, time_total: 1})
