@@ -136,8 +136,9 @@ app.controller('RecipeEditDetailController', function($scope, Restangular,$route
 app.controller('ScheduleController', function($scope, Restangular, $rootScope, localStorageService) {
 
 	Restangular.one('schedules').get().then(function(data) {
-	  $scope.schedules=data;
-	});	
+	  $scope.schedules=data.schedules;
+	  $scope.shoppingList=data.shoppingList;
+	});
 
 	$scope.minDate = moment().subtract(2, 'days').toDate();
 	$scope.maxDate = moment().add(2, 'weeks').toDate();

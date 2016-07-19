@@ -4,6 +4,7 @@ var Schedule = require('./models/schedule');
 var moment = require('moment');
 var async = require("async");
 var _ = require("underscore");
+var utils = require("./utils");
 module.exports = function(app) {
 	app.get('/seed', function(req, res) {
 
@@ -77,9 +78,18 @@ module.exports = function(app) {
 	});
 	app.get('/schedules', function(req, res) {
 		Schedule.find({})
-		.populate('recipe')
+		.populate('recipe.info')
 		.exec(function (err, doc){
-			res.json(doc);
+			shoppingList = {};
+			for(dayNum in doc) {
+				for(recipeNum in doc[dayNum].recipe) {
+					var eachRecipe = doc[dayNum].recipe[recipeNum];
+					var eachRecipeIngredients = utils.getRecipeIngredientsList(eachRecipe.info);
+					var eachScaledIngredients = utils.scaleRecipeIngredientsList(eachRecipeIngredients, eachRecipe.quantity);
+					shoppingList = utils.addIngredientListToShoppingList(eachScaledIngredients,shoppingList);
+				}
+			}
+			res.json({schedules: doc, shoppingList: shoppingList});
 		});
 	});
 	app.post('/schedules/add', function(req, res) {
