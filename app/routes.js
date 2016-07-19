@@ -89,25 +89,15 @@ module.exports = function(app) {
 		.findOne({ day: req.body.day})
 		.exec(function (err, s)
 		{
-			if(s==null)
-			{
+			if(s==null) {
 				//create 
 				s = new Schedule;
 				s.day = req.body.day;
-				s.recipe = [req.body.recipe_id];
-				s.save(function(err, r) 
-				{
-					res.json(r);
-				});
 			}
-			else
-			{
-				s.recipe.push(req.body.recipe_id);
-				s.save(function(err, r) 
-				{
-					res.json(r);
-				});
-			}
+			s.recipe.push({quantity: 2, info: req.body.recipe_id});
+			s.save(function(err, r) {
+				res.json(r);
+			});
 		  // res.json(s);
 		});
 

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var ScheduleSchema = new mongoose.Schema({
-  recipe: [{ type: mongoose.Schema.ObjectId, ref: 'Recipe' }],
+  recipe: [{info: { type: mongoose.Schema.ObjectId, ref: 'Recipe' }, quantity: { type: Number, default: 1 }}],
   day: { type: Date, default: Date.now },
 });
 

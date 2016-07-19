@@ -1,7 +1,7 @@
 <table border="1">
 	<tr ng-repeat="each in schedules">
 		<td>{{each.day | amDateFormat:'dddd, MMMM Do YYYY'}}</td>
-		<td><li ng-repeat='r in each.recipe'>{{r.name}}</li></td>
+		<td><li ng-repeat='r in each.recipe'>{{r.info.name}},  quantity:{{r.quantity}}</li></td>
 	</tr>
 </table>
 
