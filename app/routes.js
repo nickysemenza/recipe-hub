@@ -5,6 +5,7 @@ var moment = require('moment');
 var async = require("async");
 var _ = require("underscore");
 var utils = require("./utils");
+var convert = require('convert-units')
 module.exports = function(app) {
 	app.get('/seed', function(req, res) {
 
@@ -80,15 +81,46 @@ module.exports = function(app) {
 		Schedule.find({})
 		.populate('recipe.info')
 		.exec(function (err, doc){
-			shoppingList = {};
-			for(dayNum in doc) {
-				for(recipeNum in doc[dayNum].recipe) {
+			var shoppingList = {};
+			for(var dayNum in doc) {
+				for(var recipeNum in doc[dayNum].recipe) {
 					var eachRecipe = doc[dayNum].recipe[recipeNum];
-					var eachRecipeIngredients = utils.getRecipeIngredientsList(eachRecipe.info);
+					var eachRecipeIngredients = utils.getRecipeIngredientsList(eachRecipe.info, eachRecipe.quantity);
 					var eachScaledIngredients = utils.scaleRecipeIngredientsList(eachRecipeIngredients, eachRecipe.quantity);
+					//console.log(eachScaledIngredients);
 					shoppingList = utils.addIngredientListToShoppingList(eachScaledIngredients,shoppingList);
 				}
 			}
+
+			for(var x in shoppingList)
+			{
+				// console.log(shoppingList[x].items);
+
+				shoppingList[x].items = shoppingList[x].items.map(function(listItem) {
+					//TODO: ES6 spread?
+					if(listItem.quantity_unit!="")//keep unitless things
+						return {
+							grams: listItem.grams,
+							recipe: listItem.recipe,
+							quantity_unit: 'cup',
+							quantity: convert(listItem.quantity).from(listItem.quantity_unit).to('cup')
+						};
+					return listItem;
+				});
+				// console.log(shoppingList[x].items);
+				// console.log('---------');
+
+				var sum = shoppingList[x].items.reduce(function(a, b) {
+					//todo: invalidate if an item is 0grams
+					return {quantity: a.quantity + b.quantity, grams: a.grams + b.grams, quantity_unit: a.quantity_unit};
+				});
+				// console.log(sum);
+				// console.log('-------');
+
+				shoppingList[x].totals=sum;
+				//delete(shoppingList[x].items);
+			}
+
 			res.json({schedules: doc, shoppingList: shoppingList});
 		});
 	});

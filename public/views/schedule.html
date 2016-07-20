@@ -28,6 +28,22 @@ md-min-date="minDate" md-max-date="maxDate">
 </datepicker>
 <hr>
 
-<pre>
-	{{shoppingList | json}}
-</pre>
+
+<table border="1" style="width: 100%">
+	<tr>
+		<th>item</th>
+		<th>dependencies</th>
+	</tr>
+	<tr ng-repeat="(name, ingr) in shoppingList">
+		<td>{{ingr.totals.quantity}} {{ingr.totals.quantity_unit}}(s) {{name}} ({{ingr.totals.grams}} grams)</td>
+		<td>
+			<li ng-repeat="x in ingr.items">
+				{{x.recipe.name}} @ {{x.recipe.quantity}} needs {{x.quantity.toFixed(2)}} {{x.quantity_unit}} ({{x.grams}} grams)
+			</li>
+			<!--<pre>{{ingr.items | json}}</pre>-->
+		</td>
+	</tr>
+</table>
+<!--<pre>-->
+	<!--{{shoppingList | json}}-->
+<!--</pre>-->
