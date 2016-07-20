@@ -1,4 +1,4 @@
-<div>
+<div style="padding: 20px;">
 	<div class="edit-group"><div class="editor-label">name</div><input type="text" ng-model="r.name"></div>
 	<div class="edit-group"><div class="editor-label">slug</div><input type="text" ng-model="r.slug"></div>
 	<div class="edit-group"><div class="editor-label">description</div><input type="text" ng-model="r.description"></div>
@@ -11,8 +11,15 @@
 	<div class="edit-group"><div class="editor-label">original_source</div><input type="text" ng-model="r.original_source"></div>
 
 
+	<h3>Instruction Sections</h3>
 	<div>
 		<table border="1" style="width: 100%">
+			<tr>
+				<th>section</th>
+				<th>instructions</th>
+				<!--<th>index</th>-->
+				<th>actions</th>
+			</tr>
 			<tr ng-repeat="sect in r.sections_instructions">
 				<td><input type="text" ng-model="sect.title"></td>
 				<td>
@@ -22,7 +29,7 @@
 					</div>
 					<button ng-click="addInstructionSubSection($index)">Add Sub Section</button>
 				</td>
-				<td>{{$index}}</td>
+				<!--<td>{{$index}}</td>-->
 				<td><button ng-click="delInstructionSection($index)">Remove Section</button></td>
 			</tr>
 		</table>
@@ -30,21 +37,41 @@
 	</div>
 
 	<hr>
+	<h3>Ingredients</h3>
 	<div>
 		<table border="1" style="width: 100%">
+			<thead>
+			<tr>
+				<th>section</th>
+				<th>ingredients</th>
+				<!--<th>index</th>-->
+				<th>actions</th>
+			</tr>
+			</thead>
 			<tr ng-repeat="sect in r.sections_ingredients">
 				<td><input type="text" ng-model="sect.title"></td>
 				<td>
-					<div ng-repeat = "aa in sect.ingredients track by $index">
-						<input type="text" ng-model="sect.ingredients[$index].quantity">
-						<input type="text" ng-model="sect.ingredients[$index].quantity_unit">
-						<input type="text" ng-model="sect.ingredients[$index].ingredient">
-						<input type="text" ng-model="sect.ingredients[$index].grams">
-						<button ng-click="delIngredientSubSection($parent.$index, $index)">Remove Sub Section</button>
-					</div>
+
+					<table>
+						<thead>
+						<tr>
+							<th>quantity</th>
+							<th>unit</th>
+							<th>ingredient</th>
+							<th>grams</th>
+						</tr>
+						</thead>
+						<tr ng-repeat = "aa in sect.ingredients track by $index">
+							<td><input type="text" ng-model="sect.ingredients[$index].quantity"></td>
+							<td><input type="text" ng-model="sect.ingredients[$index].quantity_unit"></td>
+							<td><input type="text" ng-model="sect.ingredients[$index].ingredient"></td>
+							<td><input type="text" ng-model="sect.ingredients[$index].grams"></td>
+							<td><button ng-click="delIngredientSubSection($parent.$index, $index)">Remove Sub Section</button></td>
+						</tr>
+					</table>
 					<button ng-click="addIngredientSubSection($index)">Add Sub Section</button>
 				</td>
-				<td>{{$index}}</td>
+				<!--<td>{{$index}}</td>-->
 				<td><button ng-click="delIngredientSection($index)">Remove Section</button></td>
 			</tr>
 		</table>
@@ -82,15 +109,6 @@
 		<button ng-click="addTool()">add tool</button>
 	</div>
 
+
 <button ng-click="update()">UPDATE</button>
-
-
 </div>
-
-<hr>
-
-
-<!-- <pre>
-  {{r | json}}
-
-</pre> -->
